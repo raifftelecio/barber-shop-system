@@ -17,7 +17,7 @@ import {
 } from "./ui/sheet"
 import { Calendar } from "./ui/calendar"
 import { ptBR } from "date-fns/locale"
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { format, isPast, isToday, set } from "date-fns"
 import { createBooking } from "../_actions/create-booking"
 import { useSession } from "next-auth/react"
@@ -148,6 +148,15 @@ const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
       toast.error("Erro ao criar reserva. Tente novamente.")
     }
   }
+
+  const timeList = useMemo(() => {
+    if (!selectedDay) return []
+    return getTimeList({
+      bookings: dayBookings,
+      selectedDay,
+    })
+  }, [dayBookings, selectedDay])
+
   return (
     <>
       <Card>
@@ -227,8 +236,8 @@ const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
 
                   {selectedDay && (
                     <div className="flex gap-3 overflow-x-auto border-b border-solid p-5 [&::-webkit-scrollbar]:hidden">
-                      {getTimeList({ bookings: dayBookings, selectedDay }).map(
-                        (time) => (
+                      {timeList.length > 0 ? (
+                        timeList.map((time) => (
                           <Button
                             key={time}
                             variant={
@@ -239,7 +248,11 @@ const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
                           >
                             {time}
                           </Button>
-                        ),
+                        ))
+                      ) : (
+                        <p className="text-xs">
+                          Não há horários disponíveis para este dia.
+                        </p>
                       )}
                     </div>
                   )}
