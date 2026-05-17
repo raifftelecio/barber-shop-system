@@ -36,11 +36,16 @@ import { useState } from "react"
 interface BookingItemProps {
   booking: Prisma.BookingGetPayload<{
     include: {
-      service: { include: { barbershop: true } }
+      service: {
+        include: {
+          barbershop: true
+        }
+      }
     }
   }>
 }
 
+// TODO: receber agendamento como prop
 const BookingItem = ({ booking }: BookingItemProps) => {
   const [isSheetOpen, setIsSheetOpen] = useState(false)
   const {
@@ -53,8 +58,8 @@ const BookingItem = ({ booking }: BookingItemProps) => {
       setIsSheetOpen(false)
       toast.success("Reserva cancelada com sucesso!")
     } catch (error) {
-      console.log(error)
-      toast.success("Erro ao cancelar reserva. Tente novamente.")
+      console.error(error)
+      toast.error("Erro ao cancelar reserva. Tente novamente.")
     }
   }
   const handleSheetOpenChange = (isOpen: boolean) => {
@@ -62,10 +67,10 @@ const BookingItem = ({ booking }: BookingItemProps) => {
   }
   return (
     <Sheet open={isSheetOpen} onOpenChange={handleSheetOpenChange}>
-      <SheetTrigger className="w-full">
+      <SheetTrigger className="w-full min-w-[90%]">
         <Card className="min-w-[90%]">
           <CardContent className="flex justify-between p-0">
-            {/* Esquerda */}
+            {/* ESQUERDA */}
             <div className="flex flex-col gap-2 py-5 pl-5">
               <Badge
                 className="w-fit"
@@ -82,7 +87,7 @@ const BookingItem = ({ booking }: BookingItemProps) => {
                 <p className="text-sm">{booking.service.barbershop.name}</p>
               </div>
             </div>
-            {/* Direita */}
+            {/* DIREITA */}
             <div className="flex flex-col items-center justify-center border-l-2 border-solid px-5">
               <p className="text-sm capitalize">
                 {format(booking.date, "MMMM", { locale: ptBR })}
@@ -102,10 +107,11 @@ const BookingItem = ({ booking }: BookingItemProps) => {
           <SheetTitle className="text-left">Informações da Reserva</SheetTitle>
         </SheetHeader>
 
-        <div className="relative mt-6 flex h-[180px] w-full items-center">
+        <div className="relative mt-6 flex h-[180px] w-full items-end">
           <Image
-            src="/map.png"
             alt={`Mapa da barbearia ${booking.service.barbershop.name}`}
+            src="/map.png"
+            fill
             className="rounded-xl object-cover"
           />
 
@@ -144,7 +150,6 @@ const BookingItem = ({ booking }: BookingItemProps) => {
             ))}
           </div>
         </div>
-
         <SheetFooter className="mt-6">
           <div className="flex items-center gap-3">
             <SheetClose asChild>
