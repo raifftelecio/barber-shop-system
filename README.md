@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SaaS Barber Shop
 
-## Getting Started
+Este projeto é uma aplicação de agendamento de serviços de barbearia desenvolvida durante o bootcamp da **FullStackClub**.
 
-First, run the development server:
+## Visão geral
+
+A aplicação permite:
+
+- visualizar barbearias e serviços
+- agendar reservas
+- confirmar ou cancelar agendamentos
+- exibir informações dos estabelecimentos
+
+## Tecnologias
+
+- Next.js 14
+- React 18
+- TypeScript
+- Tailwind CSS 3
+- Prisma
+- NextAuth
+- Radix UI
+- Sonner
+- date-fns
+
+## Como rodar
+
+1. Instale as dependências:
+
+```bash
+npm install
+```
+
+2. Execute em modo de desenvolvimento:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Abra no navegador:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Scripts úteis
 
-## Learn More
+- `npm run dev` — roda o servidor de desenvolvimento
+- `npm run build` — compila o projeto para produção
+- `npm start` — inicia o servidor de produção
+- `npm run lint` — executa o ESLint
 
-To learn more about Next.js, take a look at the following resources:
+## Estrutura principal
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `app/` — aplicação Next.js
+- `app/globals.css` — estilos globais e configurações do Tailwind
+- `app/_components/` — componentes reutilizáveis
+- `app/_components/ui/` — componentes de interface
+- `app/bookings/` — página de agendamentos
+- `app/barbershops/[id]/` — página de detalhes da barbearia
+- `prisma/` — modelo e seed do banco
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Avisos e limitações
 
-## Deploy on Vercel
+Este projeto está em adaptação a partir de uma versão anterior do Tailwind.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Ainda existem alguns problemas de frontend em bordas e espaçamentos.
+- Alguns componentes podem não renderizar bordas ou botões corretamente em todas as telas.
+- A configuração do Tailwind e o uso de `@apply` exigem atenção adicional.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Notas do bootcamp
+
+O projeto foi realizado como parte do bootcamp da FullStackClub. A implementação atual ainda está em evolução e serve como base para ajustes posteriores.
