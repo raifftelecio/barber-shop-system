@@ -178,7 +178,7 @@ const BookingItem = ({ booking }: BookingItemProps) => {
                         Voltar
                       </Button>
                     </DialogClose>
-                    <DialogClose className="w-full">
+                    <DialogClose asChild>
                       <Button
                         variant="destructive"
                         onClick={handleCancelBooking}

@@ -74,9 +74,9 @@ const BarbershopPage = async ({ params }: BarbershopPageProps) => {
           <p className="text-sm">{barbershop?.address}</p>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="inline-flex items-center gap-2 rounded-full border border-border bg-muted/50 px-3 py-1 text-sm dark:border-input">
           <StarIcon className="fill-primary text-primary" size={18} />
-          <p className="text-sm">5,0 (499 avaliações)</p>
+          <span>5,0 (499 avaliações)</span>
         </div>
       </div>
 
