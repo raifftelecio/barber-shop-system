@@ -67,16 +67,24 @@
 }
 
 @layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
   * {
-    @apply border-border antialiased;
+    border-color: hsl(var(--border));
+    @apply antialiased;
   }
 
-  html,
-  body {
-    @apply h-full;
+  .dark * {
+    border-color: hsl(var(--input));
+  }
+
+  html {
+    height: 100%;
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply min-h-screen bg-background text-foreground;
   }
 }
